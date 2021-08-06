@@ -1,0 +1,20 @@
+version: '3'
+
+services:
+  nestjs:
+    build:
+      context: ..
+      dockerfile: .devcontainer/Dockerfile
+      args:
+        ENVIRONMENT: ${ENVIRONMENT}
+        NODE_VERSION: ${NODE_VERSION}
+        ALPINE_VERSION: ${ALPINE_VERSION}
+    restart: unless-stopped
+    volumes:
+      - "..:/nestjs:rw"
+      - "nestjs_demo-node_modules:/nestjs/node_modules"
+    ports:
+      - 3000:3000
+
+volumes:
+    nestjs_demo-node_modules:
