@@ -10,8 +10,8 @@ RUN apk --update add --no-cache git && \
 
 WORKDIR /nestjs
 
-# COPY package*.json ./
-# RUN npm install --no-progress --ignore-optional
+COPY package*.json ./
+RUN npm install --no-progress --ignore-optional
 
 # CMD [ "npm", "start" ]
 CMD ["tail", "-f", "/dev/null"]
