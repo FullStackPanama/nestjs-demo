@@ -15,7 +15,7 @@ import { join } from 'path';
       username: 'demo',
       password: 'fullstackpanama2021',
       database: 'demo',
-      entities: [join(__dirname, '../**/**/*entity{.ts,.js}')],
+      entities: [join(__dirname, './**/**/*entity{.ts,.js}')],
       autoLoadEntities: true,
       synchronize: true,
     }),
