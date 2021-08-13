@@ -1,0 +1,14 @@
+version: '3.7'
+
+services:
+  
+  api:
+    container_name: nestjs-demo
+    build:
+      context: .
+      target: production
+    ports:
+      - ${PORT}:${PORT}
+    env_file:
+      - .env
+    restart: unless-stopped
