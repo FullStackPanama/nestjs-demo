@@ -1,55 +1,40 @@
 import { Body, Controller, Delete, Get, NotFoundException, Param, ParseIntPipe, Post, Put } from '@nestjs/common';
-
-interface ITareas {
-  id: number;
-  text: string;
-  done: boolean;
-}
+import { TareasService } from './tareas.service';
+import { CreateTareaDto } from './dto/create-tarea.dto';
+import { UpdateTareaDto } from './dto/update-tarea.dto';
 
 @Controller('tareas')
 export class TareasController {
-  private tareas: ITareas[] = [];
+  constructor(private readonly tareasService: TareasService) {}
 
   @Get()
-  getTareas(): ITareas[] {
-    return this.tareas;
+  getTareas() {
+    return this.tareasService.findAll();
   }
 
   @Get(':id')
-  getTarea(@Param('id', ParseIntPipe) id: number): ITareas {
-    const tarea = this.tareas.find((todo) => todo.id === id);
-
-    if (!tarea) throw new NotFoundException();
-
-    return tarea;
+  getTarea(@Param('id', ParseIntPipe) id: number) {
+    return this.tareasService.findOne(id);
   }
 
   @Post()
-  crearTarea(@Body() tarea: ITareas) {
-    this.tareas.push(tarea);
-    return 'Tarea agregada';
+  crearTarea(@Body() tarea: CreateTareaDto) {
+    return this.tareasService.create(tarea);
   }
 
   @Put(':id')
-  modificarTarea(
+  async modificarTarea(
     @Param('id', ParseIntPipe) id: number,
-    @Body() tarea: ITareas,
+    @Body() tarea: UpdateTareaDto,
   ) {
-    const index = this.tareas.findIndex((tarea) => tarea.id === id);
+    const tareaDb = await this.tareasService.findOne(id);
+    if (!tareaDb) throw new NotFoundException();
 
-    if (index === -1) throw new NotFoundException();
-    this.tareas[index] = tarea;
-
-    return 'Tarea actualizada';
+    return this.tareasService.update(id, tarea);
   }
 
   @Delete(':id')
   borrarTarea(@Param('id', ParseIntPipe) id: number) {
-    const index = this.tareas.findIndex((tarea) => tarea.id === id);
-
-    if (index === -1) throw new NotFoundException();
-
-    this.tareas.splice(index, 1);
-    return 'Tarea eliminada';
+    return this.tareasService.delete(id);
   }
 }
