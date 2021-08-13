@@ -10,11 +10,11 @@ import { join } from 'path';
   imports: [
     TypeOrmModule.forRoot({
       type: 'mysql',
-      host: 'database',
-      port: 3306,
-      username: 'demo',
-      password: 'fullstackpanama2021',
-      database: 'demo',
+      host: process.env.DATABASE_HOST || 'database',
+      port: parseInt(process.env.DATABASE_PORT, 10) || 3306,
+      username: process.env.DATABASE_USER || 'demo',
+      password: process.env.DATABASE_PASS || 'fullstackpanama2021',
+      database: process.env.DATABASE_DB || 'demo',
       entities: [join(__dirname, './**/**/*entity{.ts,.js}')],
       autoLoadEntities: true,
       synchronize: true,
@@ -25,5 +25,4 @@ import { join } from 'path';
   controllers: [AppController],
   providers: [AppService],
 })
-
 export class AppModule {}
