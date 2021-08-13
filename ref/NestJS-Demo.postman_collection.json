@@ -33,7 +33,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"id\": 1,\n    \"text\": \"Terminar demo\",\n    \"done\": false\n}",
+							"raw": "{\n    \"tarea\": \"Terminar demo\",\n    \"terminada\": false\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -79,7 +79,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"id\": 1,\n    \"text\": \"Terminar demo\",\n    \"done\": true\n}",
+							"raw": "{\n    \"terminada\": true\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -106,14 +106,14 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "localhost:3000/tareas/2",
+							"raw": "localhost:3000/tareas/1",
 							"host": [
 								"localhost"
 							],
 							"port": "3000",
 							"path": [
 								"tareas",
-								"2"
+								"1"
 							]
 						}
 					},
