@@ -13,7 +13,7 @@
         "path": "/bin/ash"
       }
     },
-    "terminal.integrated.defaultProfile.linux": "ash",
+    "terminal.integrated.defaultProfile.linux": "bash",
   },
 
   // Add the IDs of extensions you want installed when the container is created.
